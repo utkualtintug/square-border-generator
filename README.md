@@ -56,7 +56,7 @@ pip install pillow
 ## Usage
 
 1. Create a folder named `input` in the project root.
-2. Place your photos (`.jpg`, `.jpeg`, `.png`) inside the `input` folder.
+2. Place your photos (.jpg, .jpeg, .png) inside the `input` folder.
 3. Run the script.
 4. Processed images will be saved to the `output` folder.
 
@@ -67,3 +67,14 @@ The script will automatically create the `output` folder if it does not exist.
 ```bash
 python square_border.py
 ```
+
+## CLI Options
+
+```bash
+python square_border.py --size 1080 --color black
+```
+
+- --size — Output image size (e.g. 1080, 1440)
+- --color — Border color (white, black, gray)
+
+Run `python square_border.py --help` to see all available options.
