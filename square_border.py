@@ -1,4 +1,5 @@
 from PIL import Image
+import argparse
 import os
 
 # Base directory of the script
@@ -11,8 +12,26 @@ output_dir = os.path.join(BASE_DIR, "output")
 # Create output folder if needed
 os.makedirs(output_dir, exist_ok=True)
 
-TARGET_SIZE = 1440
-WHITE = (255, 255, 255)
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description="Square border generator")
+parser.add_argument("--size", type=int, default=1440, help="Output image size (e.g. 1080, 1440)")
+parser.add_argument("--color", type=str, default="white", help="Output border color (e.g. white, black or gray)")
+
+args = parser.parse_args()
+
+# Read CLI options
+TARGET_SIZE = args.size
+color = args.color.lower()
+
+# Map color argument to RGB value
+if color == "white":
+    BORDER_COLOR = (255, 255, 255)
+elif color == "black":
+    BORDER_COLOR = (0, 0, 0)
+elif color == "gray":
+    BORDER_COLOR = (128, 128, 128)
+else:
+    raise ValueError("Unsupported color. Use 'white', 'black', or 'gray'.")
 
 files = os.listdir(input_dir)
 
@@ -39,7 +58,7 @@ for file_name in files:
         img_resized = img.resize((new_width, new_height), Image.LANCZOS)
 
         # Create square canvas and center image
-        canvas = Image.new("RGB", (TARGET_SIZE, TARGET_SIZE), WHITE)
+        canvas = Image.new("RGB", (TARGET_SIZE, TARGET_SIZE), BORDER_COLOR)
         x_offset = (TARGET_SIZE - new_width) // 2
         y_offset = (TARGET_SIZE - new_height) // 2
         canvas.paste(img_resized, (x_offset, y_offset))
