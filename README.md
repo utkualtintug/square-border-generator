@@ -1,10 +1,10 @@
-# Instagram Square Border
+# Square Border Generator
 
-A Python tool that converts all images in the `input` folder into square photos with a **white 1:1 border**, optimized for Instagram sharing.
+A Python tool that converts images into square photos with a white 1:1 border, suitable for clean and consistent presentation on social media.
 
 ## Motivation
 
-When posting photos to Instagram, I like to add a white square border so my profile looks cleaner and more consistent.
+When posting photos on social media platforms, I like to add a white square border so profiles look cleaner and more consistent.
 
 Existing mobile apps can do this, but the process was inefficient:
 
@@ -14,7 +14,7 @@ Existing mobile apps can do this, but the process was inefficient:
 
 Processing a single photo often took several minutes.
 
-By running it once, all photos in a folder are converted to Instagram-ready square images **within seconds**, with no ads, no permissions, and no manual adjustments.
+By running it once, all photos in a folder are converted to square images **within seconds**, with no ads, no permissions, and no manual adjustments.
 
 ## Example
 
