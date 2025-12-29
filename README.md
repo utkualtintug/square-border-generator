@@ -1,4 +1,4 @@
-# Square Border Generator
+# Instagram Square Border
 
 A Python tool that converts all images in the `input` folder into square photos with a **white 1:1 border**, optimized for Instagram sharing.
 
@@ -59,6 +59,8 @@ pip install pillow
 2. Place your photos (`.jpg`, `.jpeg`, `.png`) inside the `input` folder.
 3. Run the script.
 4. Processed images will be saved to the `output` folder.
+
+The script will automatically create the `output` folder if it does not exist.
 
 ## Run
 
