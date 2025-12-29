@@ -2,3 +2,7 @@ venv/
 __pycache__/
 *.pyc
 .DS_store
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
