@@ -1,6 +1,6 @@
 # Square Border Generator
 
-A Python tool that converts images into square photos with a white 1:1 border, suitable for clean and consistent presentation on social media.
+A Python tool that converts images into square photos with a 1:1 border, suitable for clean and consistent presentation on social media.
 
 ## Motivation
 
