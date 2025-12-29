@@ -23,7 +23,6 @@ for file_name in files:
         new_name = f"{name}_square{ext}"
         output_path = os.path.join(output_dir, new_name)
 
-
         img = Image.open(input_path)
         width, height = img.size
 
