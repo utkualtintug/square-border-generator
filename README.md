@@ -26,31 +26,30 @@ Below is an example of the result after applying a square white border:
 
 - Python 3.x
 - [Pillow](https://pypi.org/project/Pillow/)
+- [tqdm](https://pypi.org/project/tqdm/)
 
 ## Setup
 
 ### 1) Create and activate a virtual environment
 
-```bash
-python -m venv venv
-```
-
 **macOS / Linux**
 
 ```bash
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 **Windows**
 
 ```bash
-venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 ```
 
 ### 2) Install dependencies
 
 ```bash
-pip install pillow
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -58,7 +57,7 @@ pip install pillow
 1. Create a folder named `input` in the project root.
 2. Place your photos (.jpg, .jpeg, .png) inside the `input` folder.
 3. Run the script.
-4. Processed images will be saved to the `output` folder.
+4. Processed images will be saved to the `output` folder as optimized JPEGs.
 
 The script will automatically create the `output` folder if it does not exist.
 
@@ -74,8 +73,8 @@ python square_border.py
 python square_border.py --size 1080 --color black
 ```
 
-- --size — Output image size (e.g. 1080, 1440)
-- --color — Border color (white, black, gray)
+- `--size` — Output image size in pixels (Default: **1440**)
+- `--color` — Border color (white, black, gray) (Default: **white**)
 
 Run `python square_border.py --help` to see all available options.
 
