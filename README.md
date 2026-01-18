@@ -78,3 +78,7 @@ python square_border.py --size 1080 --color black
 - --color — Border color (white, black, gray)
 
 Run `python square_border.py --help` to see all available options.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
