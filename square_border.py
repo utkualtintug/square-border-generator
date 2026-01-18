@@ -1,6 +1,10 @@
 from PIL import Image
+from tqdm import tqdm
 import argparse
 import os
+
+# (Support for 200MP images)
+Image.MAX_IMAGE_PIXELS = 200000000  # ~200 MP
 
 # Base directory of the script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -35,42 +39,43 @@ else:
 
 files = os.listdir(input_dir)
 
-for file_name in files:
-    # Process only image files
-    if file_name.lower().endswith((".jpg", ".jpeg", ".png")):
-        print("Photo:", file_name)
+Image_files = [f for f in files if f.lower().endswith((".jpg", ".jpeg", ".png"))]
 
+if not Image_files:
+    print("There are no pictures in the input folder.")
+else:
+    for file_name in tqdm(Image_files, desc="Processing", unit="img"):
+        
         input_path = os.path.join(input_dir, file_name)
 
         # Output filename
         name, ext = os.path.splitext(file_name)
         new_name = f"{name}_square{ext}"
         output_path = os.path.join(output_dir, new_name)
+        try:
+            img = Image.open(input_path)
+            width, height = img.size
 
-        img = Image.open(input_path)
-        width, height = img.size
+            # Scale image proportionally
+            scale = TARGET_SIZE / max(width, height)
+            new_width = round(width * scale)
+            new_height = round(height * scale)
 
-        # Scale image proportionally
-        scale = TARGET_SIZE / max(width, height)
-        new_width = round(width * scale)
-        new_height = round(height * scale)
+            img_resized = img.resize((new_width, new_height), Image.LANCZOS)
 
-        img_resized = img.resize((new_width, new_height), Image.LANCZOS)
+            # Create square canvas and center image
+            canvas = Image.new("RGB", (TARGET_SIZE, TARGET_SIZE), BORDER_COLOR)
+            x_offset = (TARGET_SIZE - new_width) // 2
+            y_offset = (TARGET_SIZE - new_height) // 2
+            canvas.paste(img_resized, (x_offset, y_offset))
 
-        # Create square canvas and center image
-        canvas = Image.new("RGB", (TARGET_SIZE, TARGET_SIZE), BORDER_COLOR)
-        x_offset = (TARGET_SIZE - new_width) // 2
-        y_offset = (TARGET_SIZE - new_height) // 2
-        canvas.paste(img_resized, (x_offset, y_offset))
-
-        # Save optimized JPEG
-        canvas.save(
-            output_path,
-            format="JPEG",
-            quality=85,
-            subsampling=2,
-            optimize=True
-        )
-
-    else:
-        print("Skip:", file_name)
+            # Save optimized JPEG
+            canvas.save(
+                output_path,
+                format="JPEG",
+                quality=85,
+                subsampling=2,
+                optimize=True
+            )
+        except Exception as e:
+            tqdm.write(f"Error ({file_name}): {e}")
